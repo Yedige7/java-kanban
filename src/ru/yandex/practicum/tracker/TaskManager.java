@@ -23,8 +23,8 @@ public class TaskManager {
     }
 
     public void updateSubtask(Subtask subtask){
-
         subtasks.put(subtask.getId(), subtask);
+        changeEpicStatus(subtask.getEpicId());
     }
 
     public ArrayList<Task> getTasks() {
@@ -54,7 +54,7 @@ public class TaskManager {
 
     }
 
-    public void removeSubtasks(){
+    private void removeSubtasks(){
         ArrayList<Integer> epicsList = new ArrayList<>();
         for (Subtask subtask: subtasks.values()) {
             epicsList.add(subtask.getEpicId());
