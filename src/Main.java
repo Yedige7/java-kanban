@@ -7,7 +7,7 @@ public class Main {
 
     public static void main(String[] args) {
 
-        TaskManager taskManager = new TaskManager();
+        InMemoryTaskManager taskManager = new InMemoryTaskManager();
         Task taskTest = new Task("Test", "Test description", taskManager.generateId(), Status.NEW);
         Task taskTest2 = new Task("Test2", "Test description 2", taskManager.generateId(), Status.NEW);
 

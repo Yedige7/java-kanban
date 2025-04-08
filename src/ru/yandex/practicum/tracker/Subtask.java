@@ -5,6 +5,9 @@ public class Subtask extends Task {
 
     public Subtask(String title, String description, int id, Status status, int epicId) {
         super(title, description, id, status);
+        if (id == epicId) {
+            throw new IllegalArgumentException("Subtask ID must not be the same as Epic ID.");
+        }
         this.epicId = epicId;
     }
 

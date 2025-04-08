@@ -10,12 +10,22 @@ public class Epic extends Task {
     }
 
     public void addSubtask(int id){
-        subTasks.add(id);
+        if(id == this.getId()){
+            System.out.println("нельзя добавлять свой id");
+
+        } else {
+
+            subTasks.add(id);
+        }
+    }
+    public ArrayList<Integer> getSubTasks(){
+
+        return subTasks;
     }
 
     @Override
     public String toString() {
-        return "Subtask {" +
+        return "Epic {" +
                 " Title = '" + getTitle() + '\'' +
                 ", description = '" + getDescription() + '\'' +
                 ", id = " + getId() +
