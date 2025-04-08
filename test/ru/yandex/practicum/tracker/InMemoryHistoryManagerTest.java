@@ -45,7 +45,6 @@ public class InMemoryHistoryManagerTest {
         historyManager.add(epicTest);
         historyManager.add(subtaskTest);
         final List<Task> history = historyManager.getHistory();
-        System.out.println("first from history " + history);
         assertNotNull(history, "После добавления задачи, история не должна быть пустой.");
         assertEquals(3, history.size(), "После добавления задачи, в история не должна быть 3.");
     }
@@ -59,7 +58,6 @@ public class InMemoryHistoryManagerTest {
         Epic epicTest = new Epic("Epic", "Epic description", taskManager.generateId(), Status.NEW);
         historyManager.add(epicTest);
         final List<Task> history = historyManager.getHistory();
-
         assertNotNull(history, "После добавления задачи, история не должна быть пустой.");
         assertEquals(10, history.size(), "После добавления задачи, в история не должна быть 3.");
     }

@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -25,7 +26,7 @@ public class EpicTest {
         TaskManager manager = new InMemoryTaskManager();
         Epic epicTest = new Epic("Epic", "Epic description", manager.generateId(), Status.NEW);
         epicTest.addSubtask(epicTest.getId());
-        ArrayList<Integer> list = epicTest.getSubTasks();
+        List<Integer> list = epicTest.getSubTasks();
         boolean chekId = false;
         for (Integer id: list) {
            if(id ==  epicTest.getId()){

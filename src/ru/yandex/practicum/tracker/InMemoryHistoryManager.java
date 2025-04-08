@@ -3,26 +3,23 @@ package ru.yandex.practicum.tracker;
 import java.util.ArrayList;
 import java.util.List;
 
-public class InMemoryHistoryManager<T extends Task> implements HistoryManager<T> {
-    private final List<T> taskList;
-    private int oldest;
+public class InMemoryHistoryManager implements HistoryManager {
+    private final List<Task> taskList;
+
 
     public InMemoryHistoryManager() {
         this.taskList = new ArrayList<>();
-        this.oldest = 0;
     }
 
     @Override
-    public void add(T task) {
+    public void add(Task task) {
         if (task == null) {
             return;
         }
-
-        T copiedTask = null;
-
+        Task copiedTask = null;
         if (task instanceof Subtask) {
             Subtask original = (Subtask) task;
-            copiedTask = (T) new Subtask(
+            copiedTask = new Subtask(
                     original.getTitle(),
                     original.getDescription(),
                     original.getId(),
@@ -37,15 +34,14 @@ public class InMemoryHistoryManager<T extends Task> implements HistoryManager<T>
                     original.getId(),
                     original.getStatus()
             );
-           ArrayList<Integer> integers = original.getSubTasks();
+           List<Integer> integers = original.getSubTasks();
             for (Integer id :integers) {
                 copy.addSubtask(id);
             }
-
-            copiedTask = (T) copy;
+            copiedTask = copy;
         } else {
             Task original = task;
-            copiedTask = (T) new Task(
+            copiedTask = new Task(
                     original.getTitle(),
                     original.getDescription(),
                     original.getId(),
@@ -56,16 +52,13 @@ public class InMemoryHistoryManager<T extends Task> implements HistoryManager<T>
         if (taskList.size() < 10) {
             taskList.add(copiedTask);
         } else {
-            taskList.set(oldest, copiedTask);
-            oldest++;
-            if(oldest >= 9) {
-                oldest = 0;
-            }
+            taskList.remove(0);
+            taskList.add(copiedTask);
         }
     }
 
     @Override
-    public List<T> getHistory() {
-        return new ArrayList<>(taskList); // возвращаем копию
+    public List<Task> getHistory() {
+        return new ArrayList<>(taskList);
     }
 }

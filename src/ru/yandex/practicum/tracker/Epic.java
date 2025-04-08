@@ -1,9 +1,10 @@
 package ru.yandex.practicum.tracker;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Epic extends Task {
-    private ArrayList<Integer> subTasks;
+    private List<Integer> subTasks;
     public Epic(String title, String description, int id, Status status) {
         super(title, description, id, status);
         subTasks = new ArrayList<>();
@@ -11,14 +12,14 @@ public class Epic extends Task {
 
     public void addSubtask(int id){
         if(id == this.getId()){
-            System.out.println("нельзя добавлять свой id");
+            System.out.println("Нельзя добавлять свой id");
 
         } else {
 
             subTasks.add(id);
         }
     }
-    public ArrayList<Integer> getSubTasks(){
+    public List<Integer> getSubTasks(){
 
         return subTasks;
     }
