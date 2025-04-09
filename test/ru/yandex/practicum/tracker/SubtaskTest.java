@@ -15,7 +15,7 @@ public class SubtaskTest {
         Subtask subtaskTest = new Subtask("Subtask", "Subtask description", Status.NEW, epicTest.getId());
         Subtask subtaskTest2 = new Subtask("Subtask", "Subtask description", Status.NEW, epicTest.getId());
         manager.addSubtask(subtaskTest);
-        manager.addSubtask(subtaskTest2);
+        subtaskTest2.setId(subtaskTest.getId());
         assertEquals(subtaskTest, subtaskTest2, "Экземпляры класса Task должны быть равны друг другу, если равен их id");
     }
 
