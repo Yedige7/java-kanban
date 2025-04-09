@@ -2,8 +2,7 @@ package ru.yandex.practicum.tracker;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class SubtaskTest {
 
@@ -11,10 +10,12 @@ public class SubtaskTest {
     @Test
     void chekTask(){
         TaskManager manager = new InMemoryTaskManager();
-        Epic epicTest = new Epic("Epic", "Epic description", manager.generateId(), Status.NEW);
-        Subtask subtaskTest = new Subtask("Subtask", "Subtask description", manager.generateId(), Status.NEW, epicTest.getId());
-        Subtask subtaskTest2 = new Subtask("Subtask", "Subtask description", subtaskTest.getId(), Status.NEW, epicTest.getId());
-
+        Epic epicTest = new Epic("Epic", "Epic description", Status.NEW);
+        manager.addEpics(epicTest);
+        Subtask subtaskTest = new Subtask("Subtask", "Subtask description", Status.NEW, epicTest.getId());
+        Subtask subtaskTest2 = new Subtask("Subtask", "Subtask description", Status.NEW, epicTest.getId());
+        manager.addSubtask(subtaskTest);
+        manager.addSubtask(subtaskTest2);
         assertEquals(subtaskTest, subtaskTest2, "Экземпляры класса Task должны быть равны друг другу, если равен их id");
     }
 
@@ -23,10 +24,11 @@ public class SubtaskTest {
     void checkSubtaskByItself(){
         Subtask subtaskTest = null;
         try {
-            subtaskTest = new Subtask("Subtask", "Subtask description", 1, Status.NEW, 1);
+            subtaskTest = new Subtask("Subtask", "Subtask description",  Status.NEW, 1);
+            subtaskTest.setId(1);
         } catch (Exception ex) {
-            assertNull(subtaskTest, "Not  null subtask");
+            System.out.println("Id could not be equal as Epic ID");
         }
-        assertNull(subtaskTest, "Not  null subtask");
+        assertNotEquals(subtaskTest.getId(), subtaskTest.getEpicId(), "Id could not be equal as Epic ID");
     }
 }

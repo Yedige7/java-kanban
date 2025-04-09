@@ -5,17 +5,15 @@ import java.util.List;
 
 public class Epic extends Task {
     private List<Integer> subTasks;
-    public Epic(String title, String description, int id, Status status) {
-        super(title, description, id, status);
+    public Epic(String title, String description, Status status) {
+        super(title, description, status);
         subTasks = new ArrayList<>();
     }
 
     public void addSubtask(int id){
         if(id == this.getId()){
             System.out.println("Нельзя добавлять свой id");
-
         } else {
-
             subTasks.add(id);
         }
     }

@@ -16,7 +16,6 @@ public interface TaskManager {
 
     ArrayList<Subtask> getSubtasks();
 
-    int generateId();
 
     void removeTasks();
 
@@ -42,9 +41,7 @@ public interface TaskManager {
 
     void removeSubtaskByid(int id);
 
-    ArrayList<Subtask> getEpicsSubtasks(Epic epic);
-
-    void changeEpicStatus(int id);
+    List<Subtask> getEpicsSubtasks(Epic epic);
 
     List<Task> getHistory();
 }

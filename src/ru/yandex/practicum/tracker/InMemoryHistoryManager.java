@@ -22,18 +22,18 @@ public class InMemoryHistoryManager implements HistoryManager {
             copiedTask = new Subtask(
                     original.getTitle(),
                     original.getDescription(),
-                    original.getId(),
                     original.getStatus(),
                     original.getEpicId()
             );
+            copiedTask.setId(original.getId());
         } else if (task instanceof Epic) {
             Epic original = (Epic) task;
             Epic copy = new Epic(
                     original.getTitle(),
                     original.getDescription(),
-                    original.getId(),
                     original.getStatus()
             );
+            copy.setId(original.getId());
            List<Integer> integers = original.getSubTasks();
             for (Integer id :integers) {
                 copy.addSubtask(id);
@@ -44,17 +44,15 @@ public class InMemoryHistoryManager implements HistoryManager {
             copiedTask = new Task(
                     original.getTitle(),
                     original.getDescription(),
-                    original.getId(),
                     original.getStatus()
             );
+            copiedTask.setId(original.getId());
         }
 
-        if (taskList.size() < 10) {
-            taskList.add(copiedTask);
-        } else {
+        if (taskList.size() >= 10) {
             taskList.remove(0);
-            taskList.add(copiedTask);
         }
+        taskList.add(copiedTask);
     }
 
     @Override

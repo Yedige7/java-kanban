@@ -10,8 +10,10 @@ public class TaskTest {
     @Test
     void chekTask(){
         TaskManager manager = new InMemoryTaskManager();
-        Task taskTest = new Task("Test", "Test description", manager.generateId(), Status.NEW);
-        Task task = new Task("Test2", "Test description 2",taskTest.getId(), Status.NEW);
+        Task taskTest = new Task("Test", "Test description", Status.NEW);
+        manager.addTask(taskTest);
+        Task task = new Task("Test2", "Test description 2", Status.NEW);
+        task.setId(taskTest.getId());
         assertEquals(taskTest, task, "Экземпляры класса Task должны быть равны друг другу, если равен их id");
     }
 }

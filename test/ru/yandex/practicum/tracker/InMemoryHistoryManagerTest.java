@@ -17,8 +17,8 @@ public class InMemoryHistoryManagerTest {
 
     @Test
     void add() {
-        Task taskTest = new Task("Test", "Test description", taskManager.generateId(), Status.NEW);
-
+        Task taskTest = new Task("Test", "Test description",  Status.NEW);
+        taskManager.addTask(taskTest);
         historyManager.add(taskTest);
         final List<Task> history = historyManager.getHistory();
         assertNotNull(history, "После добавления задачи, история не должна быть пустой.");
@@ -27,7 +27,8 @@ public class InMemoryHistoryManagerTest {
 
     @Test
     void checkParametrs() {
-        Task taskTest = new Task("Test", "Test description", taskManager.generateId(), Status.NEW);
+        Task taskTest = new Task("Test", "Test description", Status.NEW);
+        taskManager.addTask(taskTest);
         historyManager.add(taskTest);
         taskTest.setStatus(Status.IN_PROGRESS);
         final List<Task> history = historyManager.getHistory();
@@ -37,11 +38,13 @@ public class InMemoryHistoryManagerTest {
     }
     @Test
     void checkDiferentTypeofTask() {
-        Task taskTest = new Task("Test", "Test description", taskManager.generateId(), Status.NEW);
-
+        Task taskTest = new Task("Test", "Test description", Status.NEW);
+        taskManager.addTask(taskTest);
         historyManager.add(taskTest);
-        Epic epicTest = new Epic("Epic", "Epic description", taskManager.generateId(), Status.NEW);
-        Subtask subtaskTest = new Subtask("Subtask", "Subtask description", taskManager.generateId(), Status.NEW, epicTest.getId());
+        Epic epicTest = new Epic("Epic", "Epic description",  Status.NEW);
+        taskManager.addEpics(epicTest);
+        Subtask subtaskTest = new Subtask("Subtask", "Subtask description", Status.NEW, epicTest.getId());
+        taskManager.addSubtask(subtaskTest);
         historyManager.add(epicTest);
         historyManager.add(subtaskTest);
         final List<Task> history = historyManager.getHistory();
@@ -51,11 +54,13 @@ public class InMemoryHistoryManagerTest {
 
     @Test
     void countTasksInHistory() {
-        Task taskTest = new Task("Test", "Test description", taskManager.generateId(), Status.NEW);
+        Task taskTest = new Task("Test", "Test description", Status.NEW);
+        taskManager.addTask(taskTest);
         for (int i = 0 ; i < 10; i++ ) {
             historyManager.add(taskTest);
         }
-        Epic epicTest = new Epic("Epic", "Epic description", taskManager.generateId(), Status.NEW);
+        Epic epicTest = new Epic("Epic", "Epic description", Status.NEW);
+        taskManager.addEpics(epicTest);
         historyManager.add(epicTest);
         final List<Task> history = historyManager.getHistory();
         assertNotNull(history, "После добавления задачи, история не должна быть пустой.");

@@ -16,15 +16,18 @@ public class EpicTest {
     @Test
     void chekTask(){
         TaskManager manager = new InMemoryTaskManager();
-        Epic epicTest = new Epic("Epic", "Epic description", manager.generateId(), Status.NEW);
-        Epic epicTest2 = new Epic("Epic2", "Epic description2", epicTest.getId(), Status.NEW);
+        Epic epicTest = new Epic("Epic", "Epic description", Status.NEW);
+        manager.addEpics(epicTest);
+        Epic epicTest2 = new Epic("Epic2", "Epic description2", Status.NEW);
+        epicTest2.setId(epicTest.getId());
         assertEquals(epicTest, epicTest2, "Экземпляры класса Task должны быть равны друг другу, если равен их id");
     }
 
     @Test
     void chekEpicAddSubtask(){
         TaskManager manager = new InMemoryTaskManager();
-        Epic epicTest = new Epic("Epic", "Epic description", manager.generateId(), Status.NEW);
+        Epic epicTest = new Epic("Epic", "Epic description", Status.NEW);
+        manager.addEpics(epicTest);
         epicTest.addSubtask(epicTest.getId());
         List<Integer> list = epicTest.getSubTasks();
         boolean chekId = false;

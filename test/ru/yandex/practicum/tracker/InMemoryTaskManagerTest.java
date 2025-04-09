@@ -14,7 +14,7 @@ public class InMemoryTaskManagerTest {
 
     @Test
     void addNewTask() {
-        Task taskTest = new Task("Test", "Test description", taskManager.generateId(), Status.NEW);
+        Task taskTest = new Task("Test", "Test description", Status.NEW);
         taskManager.addTask(taskTest);
         final int taskId = taskTest.getId();
 
@@ -32,11 +32,11 @@ public class InMemoryTaskManagerTest {
 
     @Test
     void addDifferentTask() {
-        Task taskTest = new Task("Test", "Test description", taskManager.generateId(), Status.NEW);
+        Task taskTest = new Task("Test", "Test description", Status.NEW);
         taskManager.addTask(taskTest);
-        Epic epicTest = new Epic("Epic", "Epic description", taskManager.generateId(), Status.NEW);
-        Subtask subtaskTest = new Subtask("Subtask", "Subtask description", taskManager.generateId(), Status.NEW, epicTest.getId());
+        Epic epicTest = new Epic("Epic", "Epic description", Status.NEW);
         taskManager.addEpics(epicTest);
+        Subtask subtaskTest = new Subtask("Subtask", "Subtask description", Status.NEW, epicTest.getId());
         taskManager.addSubtask(subtaskTest);
         assertNotNull(taskManager.getTaskById(taskTest.getId()), "Задачи не возвращаются.");
         assertNotNull(taskManager.getEpicById(epicTest.getId()), "Задачи не возвращаются.");
@@ -49,7 +49,7 @@ public class InMemoryTaskManagerTest {
 
     @Test
     void checkDifferentParametrs() {
-        Task taskTest = new Task("Test", "Test description", taskManager.generateId(), Status.NEW);
+        Task taskTest = new Task("Test", "Test description", Status.NEW);
         taskManager.addTask(taskTest);
         assertEquals(taskTest.getId(), taskManager.getTaskById(taskTest.getId()).getId(), "Задачи не совпадают.");
         assertEquals(taskTest.getDescription(), taskManager.getTaskById(taskTest.getId()).getDescription(), "Задачи не совпадают.");
