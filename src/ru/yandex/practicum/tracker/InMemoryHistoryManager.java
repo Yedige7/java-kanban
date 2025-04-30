@@ -126,7 +126,7 @@ public class InMemoryHistoryManager implements HistoryManager {
 
         @Override
         public String toString() {
-            return "Node " + task + "; prev: " +  prev + "; next: " + next;
+            return "Node " + task + "; prev: " + prev + "; next: " + next;
         }
     }
 }

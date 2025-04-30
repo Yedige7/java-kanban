@@ -10,7 +10,7 @@ public class InMemoryTaskManager implements TaskManager {
     private Map<Integer, Task> tasks;
     private Map<Integer, Epic> epics;
     private Map<Integer, Subtask> subtasks;
-    private  HistoryManager historyManager;
+    private HistoryManager historyManager;
 
     public InMemoryTaskManager(HistoryManager historyManager) {
         tasks = new HashMap<Integer, Task>();
@@ -103,7 +103,7 @@ public class InMemoryTaskManager implements TaskManager {
 
     @Override
     public Task getTaskById(int id) {
-        if(tasks.containsKey(id)) {
+        if (tasks.containsKey(id)) {
             Task task = tasks.get(id);
             historyManager.add(task);
             return task;
@@ -113,7 +113,7 @@ public class InMemoryTaskManager implements TaskManager {
 
     @Override
     public Epic getEpicById(int id) {
-        if(epics.containsKey(id)) {
+        if (epics.containsKey(id)) {
             Epic epic = epics.get(id);
             historyManager.add(epic);
             return epic;
@@ -123,7 +123,7 @@ public class InMemoryTaskManager implements TaskManager {
 
     @Override
     public Subtask getSubtaskById(int id) {
-        if(subtasks.containsKey(id)) {
+        if (subtasks.containsKey(id)) {
             Subtask subtask = subtasks.get(id);
             historyManager.add(subtask);
             return subtask;
@@ -167,7 +167,6 @@ public class InMemoryTaskManager implements TaskManager {
         }
         return subtaskList;
     }
-
 
 
     private void changeEpicStatus(int id) {

@@ -10,13 +10,15 @@ import static org.junit.jupiter.api.Assertions.*;
 public class InMemoryTaskManagerTest {
 
 
-    private static  Managers managers ;
+    private static Managers managers;
     private TaskManager taskManager;
+
     @BeforeEach
     public void beforeEach() {
-        managers =  new Managers();
+        managers = new Managers();
         taskManager = managers.getDefault();
     }
+
     @Test
     void addNewTask() {
         Task taskTest = new Task("Test", "Test description", Status.NEW);

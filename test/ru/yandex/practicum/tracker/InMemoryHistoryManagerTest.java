@@ -9,6 +9,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 public class InMemoryHistoryManagerTest {
     private InMemoryTaskManager taskManager ;
     private HistoryManager historyManager;
+
     @BeforeEach
     public void beforeEach() {
 

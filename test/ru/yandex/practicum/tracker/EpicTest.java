@@ -11,10 +11,10 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class EpicTest {
-    private static  Managers managers = new Managers();
-    //проверьте, что наследники класса Task равны друг другу, если равен их id;
+    private static Managers managers = new Managers();
+
     @Test
-    void chekTask(){
+    void chekTask() {
         TaskManager manager = managers.getDefault();
         Epic epicTest = new Epic("Epic", "Epic description", Status.NEW);
         manager.addEpics(epicTest);
@@ -24,17 +24,17 @@ public class EpicTest {
     }
 
     @Test
-    void chekEpicAddSubtask(){
+    void chekEpicAddSubtask() {
         TaskManager manager = managers.getDefault();
         Epic epicTest = new Epic("Epic", "Epic description", Status.NEW);
         manager.addEpics(epicTest);
         epicTest.addSubtask(epicTest.getId());
         List<Integer> list = epicTest.getSubTasks();
         boolean chekId = false;
-        for (Integer id: list) {
-           if(id ==  epicTest.getId()){
-               chekId= true;
-           }
+        for (Integer id : list) {
+            if (id == epicTest.getId()) {
+                chekId = true;
+            }
         }
         assertFalse("Добавился ID епика", chekId);
     }

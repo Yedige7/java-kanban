@@ -20,7 +20,7 @@ public class SubtaskTest {
         assertEquals(subtaskTest, subtaskTest2, "Экземпляры класса Task должны быть равны друг другу, если равен их id");
     }
 
-    // проверьте, что объект Subtask нельзя сделать своим же эпиком;
+
     @Test
     void checkSubtaskByItself(){
         Subtask subtaskTest = null;
