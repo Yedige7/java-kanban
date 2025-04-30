@@ -9,13 +9,14 @@ public class SubtaskTest {
     //проверьте, что экземпляры класса Task равны друг другу, если равен их id;
     @Test
     void chekTask(){
-        TaskManager manager = new InMemoryTaskManager();
+        Managers manager = new Managers();
+        TaskManager taskManager =  manager.getDefault();
         Epic epicTest = new Epic("Epic", "Epic description", Status.NEW);
-        manager.addEpics(epicTest);
+        taskManager.addEpics(epicTest);
         Subtask subtaskTest = new Subtask("Subtask", "Subtask description", Status.NEW, epicTest.getId());
-        Subtask subtaskTest2 = new Subtask("Subtask", "Subtask description", Status.NEW, epicTest.getId());
-        manager.addSubtask(subtaskTest);
-        subtaskTest2.setId(subtaskTest.getId());
+
+        taskManager.addSubtask(subtaskTest);
+        Subtask subtaskTest2  = taskManager.getSubtaskById(subtaskTest.getId());
         assertEquals(subtaskTest, subtaskTest2, "Экземпляры класса Task должны быть равны друг другу, если равен их id");
     }
 

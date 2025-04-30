@@ -3,17 +3,16 @@ package ru.yandex.practicum.tracker;
 public class Managers {
     private  InMemoryTaskManager inMemoryTaskManager;
 
-    private static  InMemoryHistoryManager inMemoryHistoryManager;
 
     public Managers(){
-        inMemoryTaskManager = new InMemoryTaskManager();
-        inMemoryHistoryManager = new InMemoryHistoryManager();
+        inMemoryTaskManager = new InMemoryTaskManager(getDefaultHistory());
+
     }
     TaskManager getDefault(){
         return inMemoryTaskManager;
     }
 
     static InMemoryHistoryManager getDefaultHistory(){
-        return  inMemoryHistoryManager;
+        return  new InMemoryHistoryManager();
     }
 }

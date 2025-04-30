@@ -12,11 +12,11 @@ public class InMemoryTaskManager implements TaskManager {
     private Map<Integer, Subtask> subtasks;
     private  HistoryManager historyManager;
 
-    public InMemoryTaskManager() {
+    public InMemoryTaskManager(HistoryManager historyManager) {
         tasks = new HashMap<Integer, Task>();
         epics = new HashMap<Integer, Epic>();
         subtasks = new HashMap<Integer, Subtask>();
-        historyManager = Managers.getDefaultHistory();
+        this.historyManager = historyManager;
         idCounter = 0;
     }
 
@@ -134,6 +134,7 @@ public class InMemoryTaskManager implements TaskManager {
     @Override
     public void removeTaskByid(int id) {
         tasks.remove(id);
+        historyManager.remove(id);
     }
 
     @Override

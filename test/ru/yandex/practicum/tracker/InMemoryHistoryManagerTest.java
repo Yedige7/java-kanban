@@ -11,8 +11,9 @@ public class InMemoryHistoryManagerTest {
     private HistoryManager historyManager;
     @BeforeEach
     public void beforeEach() {
-        taskManager = new InMemoryTaskManager();
+
         historyManager = new InMemoryHistoryManager();
+        taskManager = new InMemoryTaskManager(historyManager);
     }
 
     @Test
@@ -64,7 +65,7 @@ public class InMemoryHistoryManagerTest {
         historyManager.add(epicTest);
         final List<Task> history = historyManager.getHistory();
         assertNotNull(history, "После добавления задачи, история не должна быть пустой.");
-        assertEquals(10, history.size(), "После добавления задачи, в история не должна быть 3.");
+        assertEquals(2, history.size(), "После добавления задачи, в история н должно быть 2.");
     }
 
 
