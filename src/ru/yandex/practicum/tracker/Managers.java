@@ -1,19 +1,17 @@
 package ru.yandex.practicum.tracker;
 
 public class Managers {
-    private  InMemoryTaskManager inMemoryTaskManager;
+    private InMemoryTaskManager inMemoryTaskManager;
 
-    private static  InMemoryHistoryManager inMemoryHistoryManager;
-
-    public Managers(){
-        inMemoryTaskManager = new InMemoryTaskManager();
-        inMemoryHistoryManager = new InMemoryHistoryManager();
+    public Managers() {
+        inMemoryTaskManager = new InMemoryTaskManager(getDefaultHistory());
     }
-    TaskManager getDefault(){
+
+    TaskManager getDefault() {
         return inMemoryTaskManager;
     }
 
-    static InMemoryHistoryManager getDefaultHistory(){
-        return  inMemoryHistoryManager;
+    static InMemoryHistoryManager getDefaultHistory() {
+        return new InMemoryHistoryManager();
     }
 }

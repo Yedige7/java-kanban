@@ -1,5 +1,6 @@
 package ru.yandex.practicum.tracker;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -8,9 +9,15 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class InMemoryTaskManagerTest {
 
-    private InMemoryTaskManager taskManager = new InMemoryTaskManager();
-    private static  Managers managers = new Managers();
 
+    private static Managers managers;
+    private TaskManager taskManager;
+
+    @BeforeEach
+    public void beforeEach() {
+        managers = new Managers();
+        taskManager = managers.getDefault();
+    }
 
     @Test
     void addNewTask() {
@@ -33,28 +40,28 @@ public class InMemoryTaskManagerTest {
     @Test
     void addDifferentTask() {
         Task taskTest = new Task("Test", "Test description", Status.NEW);
-        taskManager.addTask(taskTest);
+        managers.getDefault().addTask(taskTest);
         Epic epicTest = new Epic("Epic", "Epic description", Status.NEW);
-        taskManager.addEpics(epicTest);
+        managers.getDefault().addEpics(epicTest);
         Subtask subtaskTest = new Subtask("Subtask", "Subtask description", Status.NEW, epicTest.getId());
-        taskManager.addSubtask(subtaskTest);
-        assertNotNull(taskManager.getTaskById(taskTest.getId()), "Задачи не возвращаются.");
-        assertNotNull(taskManager.getEpicById(epicTest.getId()), "Задачи не возвращаются.");
-        assertNotNull(taskManager.getSubtaskById(subtaskTest.getId()), "Задачи не возвращаются.");
+        managers.getDefault().addSubtask(subtaskTest);
+        assertNotNull(managers.getDefault().getTaskById(taskTest.getId()), "Задачи не возвращаются.");
+        assertNotNull(managers.getDefault().getEpicById(epicTest.getId()), "Задачи не возвращаются.");
+        assertNotNull(managers.getDefault().getSubtaskById(subtaskTest.getId()), "Задачи не возвращаются.");
 
-        assertEquals(taskTest, taskManager.getTaskById(taskTest.getId()), "Задачи не совпадают.");
-        assertEquals(epicTest, taskManager.getEpicById(epicTest.getId()), "Задачи не совпадают.");
-        assertEquals(subtaskTest, taskManager.getSubtaskById(subtaskTest.getId()), "Задачи не совпадают.");
+        assertEquals(taskTest, managers.getDefault().getTaskById(taskTest.getId()), "Задачи не совпадают.");
+        assertEquals(epicTest, managers.getDefault().getEpicById(epicTest.getId()), "Задачи не совпадают.");
+        assertEquals(subtaskTest, managers.getDefault().getSubtaskById(subtaskTest.getId()), "Задачи не совпадают.");
     }
 
     @Test
     void checkDifferentParametrs() {
         Task taskTest = new Task("Test", "Test description", Status.NEW);
-        taskManager.addTask(taskTest);
-        assertEquals(taskTest.getId(), taskManager.getTaskById(taskTest.getId()).getId(), "Задачи не совпадают.");
-        assertEquals(taskTest.getDescription(), taskManager.getTaskById(taskTest.getId()).getDescription(), "Задачи не совпадают.");
-        assertEquals(taskTest.getTitle(), taskManager.getTaskById(taskTest.getId()).getTitle(), "Задачи не совпадают.");
-        assertEquals(taskTest.getStatus(), taskManager.getTaskById(taskTest.getId()).getStatus(), "Задачи не совпадают.");
+        managers.getDefault().addTask(taskTest);
+        assertEquals(taskTest.getId(), managers.getDefault().getTaskById(taskTest.getId()).getId(), "Задачи не совпадают.");
+        assertEquals(taskTest.getDescription(), managers.getDefault().getTaskById(taskTest.getId()).getDescription(), "Задачи не совпадают.");
+        assertEquals(taskTest.getTitle(), managers.getDefault().getTaskById(taskTest.getId()).getTitle(), "Задачи не совпадают.");
+        assertEquals(taskTest.getStatus(), managers.getDefault().getTaskById(taskTest.getId()).getStatus(), "Задачи не совпадают.");
 
     }
 }

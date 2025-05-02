@@ -5,20 +5,21 @@ import java.util.List;
 
 public class Epic extends Task {
     private List<Integer> subTasks;
+
     public Epic(String title, String description, Status status) {
         super(title, description, status);
         subTasks = new ArrayList<>();
     }
 
-    public void addSubtask(int id){
-        if(id == this.getId()){
+    public void addSubtask(int id) {
+        if (id == this.getId()) {
             System.out.println("Нельзя добавлять свой id");
         } else {
             subTasks.add(id);
         }
     }
-    public List<Integer> getSubTasks(){
 
+    public List<Integer> getSubTasks() {
         return subTasks;
     }
 
@@ -28,7 +29,7 @@ public class Epic extends Task {
                 " Title = '" + getTitle() + '\'' +
                 ", description = '" + getDescription() + '\'' +
                 ", id = " + getId() +
-                ", status = " + getStatus()+
+                ", status = " + getStatus() +
                 ", subTasksList = " + subTasks +
                 '}';
     }

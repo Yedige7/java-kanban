@@ -1,14 +1,17 @@
 package ru.yandex.practicum.tracker;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class InMemoryHistoryManager implements HistoryManager {
-    private final List<Task> taskList;
-
+    private final Map<Integer, Node> taskListMap;
+    private Node head;
+    private Node tail;
 
     public InMemoryHistoryManager() {
-        this.taskList = new ArrayList<>();
+        this.taskListMap = new HashMap<>();
     }
 
     @Override
@@ -34,8 +37,8 @@ public class InMemoryHistoryManager implements HistoryManager {
                     original.getStatus()
             );
             copy.setId(original.getId());
-           List<Integer> integers = original.getSubTasks();
-            for (Integer id :integers) {
+            List<Integer> integers = original.getSubTasks();
+            for (Integer id : integers) {
                 copy.addSubtask(id);
             }
             copiedTask = copy;
@@ -49,14 +52,81 @@ public class InMemoryHistoryManager implements HistoryManager {
             copiedTask.setId(original.getId());
         }
 
-        if (taskList.size() >= 10) {
-            taskList.remove(0);
+        linkLast(copiedTask);
+    }
+
+    public void linkLast(Task task) {
+        if (taskListMap.containsKey(task.getId())) {
+            remove(task.getId());
         }
-        taskList.add(copiedTask);
+
+        Node oldTail = tail;
+        Node newNode = new Node(oldTail, task, null);
+        tail = newNode;
+        if (oldTail == null) {
+            head = newNode;
+        } else {
+            oldTail.next = newNode;
+            newNode.prev = oldTail;
+        }
+
+        taskListMap.put(task.getId(), newNode);
+    }
+
+    private List<Task> getTasks() {
+        List<Task> list = new ArrayList<>();
+        Node current = head;
+        while (current != null) {
+            list.add(current.task);
+            current = current.next;
+        }
+        return list;
+
+    }
+
+    private void removeNode(Node node) {
+        Node oldHead = node.prev;
+        Node oldTail = node.next;
+        if (node.prev != null) {
+            node.prev.next = node.next;
+        } else {
+            head = node.next;
+        }
+        if (node.next != null) {
+            node.next.prev = node.prev;
+        } else {
+            tail = node.prev;
+        }
     }
 
     @Override
     public List<Task> getHistory() {
-        return new ArrayList<>(taskList);
+        return getTasks();
+    }
+
+    @Override
+    public void remove(int id) {
+        Node node = taskListMap.get(id);
+        if (node != null) {
+            removeNode(node);
+        }
+        taskListMap.remove(id);
+    }
+
+    private static class Node {
+        Task task;
+        Node next;
+        Node prev;
+
+        Node(Node prev, Task task, Node next) {
+            this.task = task;
+            this.next = next;
+            this.prev = prev;
+        }
+
+        @Override
+        public String toString() {
+            return "Node " + task + "; prev: " + prev + "; next: " + next;
+        }
     }
 }
