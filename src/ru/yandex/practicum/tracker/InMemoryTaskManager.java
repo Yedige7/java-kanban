@@ -12,6 +12,13 @@ public class InMemoryTaskManager implements TaskManager {
     private Map<Integer, Subtask> subtasks;
     private HistoryManager historyManager;
 
+    public int getIdCounter() {
+        return idCounter;
+    }
+
+    public void setIdCounter(int idCounter) {
+        this.idCounter = idCounter;
+    }
     public InMemoryTaskManager(HistoryManager historyManager) {
         tasks = new HashMap<Integer, Task>();
         epics = new HashMap<Integer, Epic>();
@@ -87,7 +94,7 @@ public class InMemoryTaskManager implements TaskManager {
     }
 
     @Override
-    public void addEpics(Epic epic) {
+    public void addEpic(Epic epic) {
         epic.setId(generateId());
         epics.put(epic.getId(), epic);
     }

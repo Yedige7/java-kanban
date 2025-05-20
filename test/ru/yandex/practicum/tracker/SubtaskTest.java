@@ -12,7 +12,7 @@ public class SubtaskTest {
         Managers manager = new Managers();
         TaskManager taskManager =  manager.getDefault();
         Epic epicTest = new Epic("Epic", "Epic description", Status.NEW);
-        taskManager.addEpics(epicTest);
+        taskManager.addEpic(epicTest);
         Subtask subtaskTest = new Subtask("Subtask", "Subtask description", Status.NEW, epicTest.getId());
 
         taskManager.addSubtask(subtaskTest);

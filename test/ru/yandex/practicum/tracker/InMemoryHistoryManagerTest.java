@@ -12,7 +12,6 @@ public class InMemoryHistoryManagerTest {
 
     @BeforeEach
     public void beforeEach() {
-
         historyManager = new InMemoryHistoryManager();
         taskManager = new InMemoryTaskManager(historyManager);
     }
@@ -44,7 +43,7 @@ public class InMemoryHistoryManagerTest {
         taskManager.addTask(taskTest);
         historyManager.add(taskTest);
         Epic epicTest = new Epic("Epic", "Epic description",  Status.NEW);
-        taskManager.addEpics(epicTest);
+        taskManager.addEpic(epicTest);
         Subtask subtaskTest = new Subtask("Subtask", "Subtask description", Status.NEW, epicTest.getId());
         taskManager.addSubtask(subtaskTest);
         historyManager.add(epicTest);
@@ -62,7 +61,7 @@ public class InMemoryHistoryManagerTest {
             historyManager.add(taskTest);
         }
         Epic epicTest = new Epic("Epic", "Epic description", Status.NEW);
-        taskManager.addEpics(epicTest);
+        taskManager.addEpic(epicTest);
         historyManager.add(epicTest);
         final List<Task> history = historyManager.getHistory();
         assertNotNull(history, "После добавления задачи, история не должна быть пустой.");

@@ -42,7 +42,7 @@ public class InMemoryTaskManagerTest {
         Task taskTest = new Task("Test", "Test description", Status.NEW);
         managers.getDefault().addTask(taskTest);
         Epic epicTest = new Epic("Epic", "Epic description", Status.NEW);
-        managers.getDefault().addEpics(epicTest);
+        managers.getDefault().addEpic(epicTest);
         Subtask subtaskTest = new Subtask("Subtask", "Subtask description", Status.NEW, epicTest.getId());
         managers.getDefault().addSubtask(subtaskTest);
         assertNotNull(managers.getDefault().getTaskById(taskTest.getId()), "Задачи не возвращаются.");
