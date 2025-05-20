@@ -19,6 +19,7 @@ public class InMemoryTaskManager implements TaskManager {
     public void setIdCounter(int idCounter) {
         this.idCounter = idCounter;
     }
+
     public InMemoryTaskManager(HistoryManager historyManager) {
         tasks = new HashMap<Integer, Task>();
         epics = new HashMap<Integer, Epic>();
