@@ -9,7 +9,7 @@ import java.util.List;
 
 public class FileBackedTaskManager extends InMemoryTaskManager {
 
-    private File file;
+    private final File file;
 
     public FileBackedTaskManager(HistoryManager historyManager, File file) {
         super(historyManager);

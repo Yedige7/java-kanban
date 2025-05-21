@@ -2,39 +2,15 @@
 import ru.yandex.practicum.tracker.*;
 
 import java.io.*;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Main {
 
     public static void main(String[] args) throws IOException {
-//        File dir = new File("C:\\Users\\Dev\\IdeaProjects\\java-sprint4-hw");
-//        File file = new File(dir, "file.CSV");
-//        try {
-//            if (file.isFile()) {
-//
-//                String content = Files.readString(file.toPath());
-//                System.out.println(content);
-//                List<String> words = new ArrayList<>();
-//                try (BufferedReader reader = new BufferedReader(
-//                        new FileReader(file, StandardCharsets.UTF_8))) {
-//                    String line;
-//                    while ((line = reader.readLine()) != null) {
-//                        if (!line.isBlank()) {
-//                            words.add(line.trim());
-//                        }
-//                    }
-//                } catch (IOException e) {
-//                    System.out.println("Произошла ошибка во время чтения файла.");
-//                }
-//            } else {
-//                file.createNewFile();
-//                if (file.isFile()) {
-//                    System.out.println("File created");
-//                }
-//            }
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
+
         File file = File.createTempFile("tasks", ".csv");
         file.deleteOnExit();
 
@@ -62,7 +38,6 @@ public class Main {
         for (Subtask s : subtasks) {
             System.out.println(s);
         }
-
         assert tasks.size() == 1 : "Задач должно быть 1";
         assert epics.size() == 1 : "Эпиков должно быть 1";
         assert subtasks.size() == 1 : "Подзадач должно быть 1";

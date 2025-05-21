@@ -12,11 +12,11 @@ public class InMemoryTaskManager implements TaskManager {
     private Map<Integer, Subtask> subtasks;
     private HistoryManager historyManager;
 
-    public int getIdCounter() {
+    protected int getIdCounter() {
         return idCounter;
     }
 
-    public void setIdCounter(int idCounter) {
+    protected void setIdCounter(int idCounter) {
         this.idCounter = idCounter;
     }
 
