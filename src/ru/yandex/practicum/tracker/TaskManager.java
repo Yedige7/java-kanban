@@ -24,7 +24,7 @@ public interface TaskManager {
 
     void addTask(Task task);
 
-    void addEpics(Epic epic);
+    void addEpic(Epic epic);
 
     void addSubtask(Subtask subtask);
 
