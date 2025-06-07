@@ -5,8 +5,6 @@ import java.io.*;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.List;
-
-import static java.util.Calendar.JANUARY;
 import static java.util.Calendar.MAY;
 
 public class Main {
