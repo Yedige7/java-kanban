@@ -43,13 +43,16 @@ public class InMemoryTaskManager implements TaskManager {
             }
         });
     }
-    public boolean isTimeOverlap(Task a, Task b){
+
+    public boolean isTimeOverlap(Task a, Task b) {
         return !(a.getEndTime().isBefore(b.getStartTime()) || a.getStartTime().isAfter(b.getEndTime()));
     }
+
     @Override
     public List<Task> getPrioritizedTasks() {
         return new ArrayList<>(prioritizedTasks);
     }
+
     @Override
     public void updateTask(Task task) {
         prioritizedTasks.remove(tasks.get(task.getId())); // удалить старую
@@ -125,6 +128,7 @@ public class InMemoryTaskManager implements TaskManager {
             changeEpicTime(id);
         }
     }
+
     public boolean isTaskOverlapping(Task task) {
         if (task.getStartTime() == null || task.getEndTime() == null) {
             return false; // без времени — не пересекается
