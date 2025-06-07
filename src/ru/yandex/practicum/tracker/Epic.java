@@ -24,13 +24,13 @@ public class Epic extends Task {
     }
 
     @Override
-    public LocalDateTime getEndTime(){
+    public LocalDateTime getEndTime() {
         return endTime;
     }
-    public void setEndTime(LocalDateTime endTime){
+
+    public void setEndTime(LocalDateTime endTime) {
         this.endTime = endTime;
     }
-
 
     public Duration getDuration() {
         return duration;
@@ -40,6 +40,7 @@ public class Epic extends Task {
     public LocalDateTime getStartTime() {
         return startTime;
     }
+
     public void setDuration(Duration duration) {
         this.duration = duration;
     }
