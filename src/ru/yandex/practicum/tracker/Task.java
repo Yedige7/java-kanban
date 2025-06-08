@@ -89,11 +89,11 @@ public class Task {
         return startTime;
     }
 
-    public void   setStartTime(LocalDateTime startTime) {
+    public void setStartTime(LocalDateTime startTime) {
        this.startTime = startTime;
     }
 
-    public void   setDuration(Duration duration) {
+    public void setDuration(Duration duration) {
         this.duration = duration;
     }
 
