@@ -9,7 +9,6 @@ import java.util.List;
 public class Epic extends Task {
     private List<Integer> subTasks;
     private LocalDateTime endTime;
-    private Duration duration;
 
 
     public Epic(String title, String description, Status status) {
@@ -32,18 +31,14 @@ public class Epic extends Task {
         this.endTime = endTime;
     }
 
-    public Duration getDuration() {
-        return duration;
-    }
+
 
     @Override
     public LocalDateTime getStartTime() {
         return startTime;
     }
 
-    public void setDuration(Duration duration) {
-        this.duration = duration;
-    }
+
 
     public void addSubtask(int id) {
         if (id == this.getId()) {
@@ -60,15 +55,18 @@ public class Epic extends Task {
     @Override
     public String toString() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        String start = (startTime != null) ? startTime.format(formatter) : "null";
+        String end = (getEndTime() != null) ? getEndTime().format(formatter) : "null";
+        String durationStr = (getDuration() != null) ? duration.toMinutes() + " мин" : "null";
         return "Epic {" +
                 " Title = '" + getTitle() + '\'' +
                 ", description = '" + getDescription() + '\'' +
                 ", id = " + getId() +
                 ", status = " + getStatus() +
                 ", subTasksList = " + subTasks +
-                ", startTime = " + startTime.format(formatter) +
-                ", duration = " + duration.toMinutes() + " мин" +
-                ", endTime = " + getEndTime().format(formatter) +
+                ", startTime = " + start +
+                ", duration = " + durationStr +
+                ", endTime = " + end +
                 '}';
     }
 }
