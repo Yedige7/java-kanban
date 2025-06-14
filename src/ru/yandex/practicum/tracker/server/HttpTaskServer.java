@@ -16,14 +16,16 @@ import java.time.LocalDateTime;
 
 public class HttpTaskServer {
     private static  TaskManager taskManager;
-    public HttpTaskServer(TaskManager taskManager){
-        HttpTaskServer.taskManager = taskManager;
-    }
     private static final int PORT = 8080;
     private static HttpServer httpServer;
+
     public static void main(String[] args) throws IOException {
         taskManager =  new InMemoryTaskManager(new InMemoryHistoryManager());
         start(taskManager);
+    }
+
+    public HttpTaskServer(TaskManager taskManager) {
+        HttpTaskServer.taskManager = taskManager;
     }
 
     public static void start(TaskManager taskManager) throws IOException {
