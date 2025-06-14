@@ -126,7 +126,7 @@ public class InMemoryTaskManager implements TaskManager {
         }
     }
 
-    private boolean isTaskOverlapping(Task task) {
+    public boolean isTaskOverlapping(Task task) {
         return getPrioritizedTasks().stream()
                 .filter(other -> other.getStartTime() != null && other.getEndTime() != null)
                 .anyMatch(other -> isTimeOverlap(task, other));
@@ -220,7 +220,7 @@ public class InMemoryTaskManager implements TaskManager {
         subtasks.remove(id);
         if (epic != null) {
             changeEpicStatus(epic.getId());
-            changeEpicStatus(subtask.getId());
+            changeEpicTime(epic.getId());
         }
     }
 
@@ -297,6 +297,10 @@ public class InMemoryTaskManager implements TaskManager {
                 epic.setEndTime(null);
                 epic.setDuration(Duration.ZERO);
             }
+        } else {
+            epic.setStartTime(null);
+            epic.setEndTime(null);
+            epic.setDuration(Duration.ZERO);
         }
     }
 
