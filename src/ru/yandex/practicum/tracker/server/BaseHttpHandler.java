@@ -34,7 +34,6 @@ public class BaseHttpHandler {
         try (OutputStream os = exchange.getResponseBody()) {
             os.write(bytes);
         }
-        exchange.close();
     }
 
 }

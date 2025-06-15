@@ -15,9 +15,9 @@ public class EpicHandler extends BaseHttpHandler implements HttpHandler {
     private final TaskManager manager;
     private final Gson gson;
 
-    public EpicHandler(TaskManager manager) throws IOException {
+    public EpicHandler(TaskManager manager, Gson gson) throws IOException {
         this.manager = manager;
-        this.gson = HttpTaskServer.getGson();
+        this.gson = gson;
     }
 
     @Override
@@ -37,7 +37,7 @@ public class EpicHandler extends BaseHttpHandler implements HttpHandler {
                     handleDelete(httpExchange, query);
                     break;
                 default:
-                    sendHasInteractions(httpExchange, "Not Allowed");
+                    sendHasInteractions(httpExchange, "HTTP-метод не разрешен для данного ресурса.");
             }
         } catch (Exception e) {
             sendHasInteractions(httpExchange, e.getMessage());
@@ -60,7 +60,7 @@ public class EpicHandler extends BaseHttpHandler implements HttpHandler {
                 if (epic != null) {
                     sendText(exchange, gson.toJson(epic));
                 } else {
-                    sendNotFound(exchange, "Task not found");
+                    sendNotFound(exchange, "Не найдено");
                 }
 
             }
@@ -75,7 +75,7 @@ public class EpicHandler extends BaseHttpHandler implements HttpHandler {
             Epic epic = gson.fromJson(body, Epic.class);
             if (epic.getId() == 0 || manager.getEpicById(epic.getId()) == null) {
                 if (manager.isTaskOverlapping(epic)) {
-                    sendOverlaping(exchange, "Task time overlaps with existing task.");
+                    sendOverlaping(exchange, "Время выполнения задачи совпадает с существующей задачей.");
                     return;
                 }
                 manager.addEpic(epic);
@@ -99,11 +99,11 @@ public class EpicHandler extends BaseHttpHandler implements HttpHandler {
             }
             Epic task = manager.getEpicById(id);
             if (task == null) {
-                sendNotFound(exchange, "Task not found");
+                sendNotFound(exchange, "Не найдено");
                 return;
             }
             manager.removeEpicByid(id);
-            sendText(exchange, "DELETE");
+            sendText(exchange, "Удален");
         } catch (IOException e) {
             sendHasInteractions(exchange, e.getMessage());
         }

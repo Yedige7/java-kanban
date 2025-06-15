@@ -12,9 +12,9 @@ public class PrioritizedHandler extends BaseHttpHandler implements HttpHandler {
     private final TaskManager manager;
     private final Gson gson;
 
-    public PrioritizedHandler(TaskManager manager) throws IOException {
+    public PrioritizedHandler(TaskManager manager, Gson gson) throws IOException {
         this.manager = manager;
-        this.gson = HttpTaskServer.getGson();
+        this.gson = gson;
     }
 
     @Override
@@ -28,7 +28,7 @@ public class PrioritizedHandler extends BaseHttpHandler implements HttpHandler {
                     handleGet(httpExchange, query);
                     break;
                 default:
-                    sendHasInteractions(httpExchange, "Not Allowed");
+                    sendHasInteractions(httpExchange, "HTTP-метод не разрешен для данного ресурса.");
             }
         } catch (Exception e) {
             System.err.println(e.getMessage());

@@ -27,7 +27,7 @@ public class SubtaskTest {
             subtaskTest = new Subtask("Subtask", "Subtask description", Status.NEW, 1);
             subtaskTest.setId(1);
         } catch (Exception ex) {
-            System.out.println("Id could not be equal as Epic ID");
+            System.out.println("ID не может быть таким же как у Епика");
         }
         assertNotEquals(subtaskTest.getId(), subtaskTest.getEpicId(), "Id could not be equal as Epic ID");
     }

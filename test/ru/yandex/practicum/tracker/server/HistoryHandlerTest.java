@@ -85,6 +85,6 @@ public class HistoryHandlerTest {
         HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
 
         assertEquals(500, response.statusCode());
-        assertTrue(response.body().contains("Not Allowed"));
+        assertTrue(response.body().contains("HTTP-метод не разрешен для данного ресурса."));
     }
 }

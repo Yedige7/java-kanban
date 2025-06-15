@@ -14,9 +14,9 @@ public class TaskHandler extends BaseHttpHandler implements HttpHandler {
     private final TaskManager manager;
     private final Gson gson;
 
-    public TaskHandler(TaskManager manager) throws IOException {
+    public TaskHandler(TaskManager manager, Gson gson) throws IOException {
         this.manager = manager;
-        this.gson = HttpTaskServer.getGson();
+        this.gson = gson;
     }
 
     @Override
@@ -36,7 +36,7 @@ public class TaskHandler extends BaseHttpHandler implements HttpHandler {
                     handleDelete(httpExchange, query);
                     break;
                 default:
-                    sendHasInteractions(httpExchange, "Not Allowed");
+                    sendHasInteractions(httpExchange, "HTTP-метод не разрешен для данного ресурса.");
             }
         } catch (Exception e) {
             sendHasInteractions(httpExchange, e.getMessage());
@@ -59,7 +59,7 @@ public class TaskHandler extends BaseHttpHandler implements HttpHandler {
                 if (task != null) {
                     sendText(exchange, gson.toJson(task));
                 } else {
-                    sendNotFound(exchange, "Task not found");
+                    sendNotFound(exchange, "Задача не найдена");
                 }
 
             }
@@ -75,7 +75,7 @@ public class TaskHandler extends BaseHttpHandler implements HttpHandler {
 
             if (task.getId() == 0 || manager.getTaskById(task.getId()) == null) {
                 if (manager.isTaskOverlapping(task)) {
-                    sendOverlaping(exchange, "Task time overlaps with existing task.");
+                    sendOverlaping(exchange, "Время выполнения задачи совпадает с существующей задачей.");
                     return;
                 }
                 manager.addTask(task);
@@ -99,12 +99,12 @@ public class TaskHandler extends BaseHttpHandler implements HttpHandler {
             }
             Task task = manager.getTaskById(id);
             if (task == null) {
-                sendNotFound(exchange, "Task not found");
+                sendNotFound(exchange, "Не найдено");
                 return;
             }
 
             manager.removeTaskByid(id);
-            sendText(exchange, "DELETE");
+            sendText(exchange, "Удален");
         } catch (IOException e) {
             sendHasInteractions(exchange, e.getMessage());
         }

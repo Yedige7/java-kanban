@@ -177,7 +177,7 @@ public class HttpTaskManagerSubTasksTest {
         HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
 
         assertEquals(404, response.statusCode());
-        assertEquals("Task not found", response.body());
+        assertEquals("Не найдено", response.body());
     }
 
     @Test
@@ -223,6 +223,6 @@ public class HttpTaskManagerSubTasksTest {
         HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
 
         assertEquals(200, response.statusCode());
-        assertEquals("DELETE", response.body());
+        assertEquals("Удален", response.body());
     }
 }
