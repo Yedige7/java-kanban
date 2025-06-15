@@ -32,7 +32,7 @@ public class HistoryHandler extends BaseHttpHandler implements HttpHandler {
             }
         } catch (Exception e) {
             System.err.println(e.getMessage());
-            sendHasInteractions(httpExchange, e.getMessage());
+            sendHasInteractions(httpExchange, "Что-то пошло не так");
         }
     }
 
@@ -45,7 +45,7 @@ public class HistoryHandler extends BaseHttpHandler implements HttpHandler {
             }
         } catch (IOException e) {
             System.err.println(e.getMessage());
-            sendHasInteractions(exchange, e.getMessage());
+            sendHasInteractions(exchange, "Что-то пошло не так");
         }
     }
 

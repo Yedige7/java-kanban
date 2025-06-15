@@ -39,7 +39,7 @@ public class SubtaskHandler extends BaseHttpHandler implements HttpHandler {
                     sendHasInteractions(httpExchange, "HTTP-метод не разрешен для данного ресурса.");
             }
         } catch (Exception e) {
-            sendHasInteractions(httpExchange, e.getMessage());
+            sendHasInteractions(httpExchange, "Что-то пошло не так");
         }
     }
 
@@ -64,7 +64,7 @@ public class SubtaskHandler extends BaseHttpHandler implements HttpHandler {
 
             }
         } catch (IOException e) {
-            sendHasInteractions(exchange, e.getMessage());
+            sendHasInteractions(exchange, "Что-то пошло не так");
         }
     }
 
@@ -84,7 +84,7 @@ public class SubtaskHandler extends BaseHttpHandler implements HttpHandler {
             }
             sendText(exchange, body);
         } catch (IOException e) {
-            sendHasInteractions(exchange, e.getMessage());
+            sendHasInteractions(exchange, "Что-то пошло не так");
         }
     }
 
@@ -105,7 +105,7 @@ public class SubtaskHandler extends BaseHttpHandler implements HttpHandler {
             manager.removeSubtaskByid(id);
             sendText(exchange, "Удален");
         } catch (IOException e) {
-            sendHasInteractions(exchange, e.getMessage());
+            sendHasInteractions(exchange, "Что-то пошло не так");
         }
     }
 }

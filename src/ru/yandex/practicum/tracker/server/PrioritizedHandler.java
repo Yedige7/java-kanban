@@ -45,7 +45,7 @@ public class PrioritizedHandler extends BaseHttpHandler implements HttpHandler {
             }
         } catch (IOException e) {
             System.err.println(e.getMessage());
-            sendHasInteractions(exchange, e.getMessage());
+            sendHasInteractions(exchange, "Что-то пошло не так");
         }
     }
 
