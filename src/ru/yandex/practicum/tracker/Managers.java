@@ -7,7 +7,7 @@ public class Managers {
         inMemoryTaskManager = new InMemoryTaskManager(getDefaultHistory());
     }
 
-    TaskManager getDefault() {
+    public TaskManager getDefault() {
         return inMemoryTaskManager;
     }
 

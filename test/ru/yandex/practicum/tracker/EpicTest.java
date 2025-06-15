@@ -8,7 +8,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class EpicTest {
-    private static Managers managers = new Managers();
+    private static final Managers managers = new Managers();
 
     @Test
     void chekTask() {

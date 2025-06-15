@@ -2,13 +2,15 @@ package ru.yandex.practicum.tracker;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-public class InMemoryHistoryManagerTest  extends TaskManagerTest<InMemoryTaskManager> {
+public class InMemoryHistoryManagerTest extends TaskManagerTest<InMemoryTaskManager> {
     private HistoryManager historyManager;
 
     @BeforeEach
