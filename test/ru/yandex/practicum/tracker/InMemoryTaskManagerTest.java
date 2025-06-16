@@ -2,12 +2,13 @@ package ru.yandex.practicum.tracker;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
 import java.time.Duration;
 import java.time.LocalDateTime;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class InMemoryTaskManagerTest extends TaskManagerTest<InMemoryTaskManager>{
+public class InMemoryTaskManagerTest extends TaskManagerTest<InMemoryTaskManager> {
 
     @BeforeEach
     public void beforeEach() {
@@ -43,8 +44,8 @@ public class InMemoryTaskManagerTest extends TaskManagerTest<InMemoryTaskManager
     void shouldReturnNewStatusIfAllSubtasksAreNew() {
         Epic epic = new Epic("Epic", "Desc", Status.NEW);
         taskManager.addEpic(epic);
-        taskManager.addSubtask(new Subtask("Sub1", "Desc", Status.NEW, epic.getId(),  LocalDateTime.of(2025, 6, 5, 7, 0), Duration.ofMinutes(30)));
-        taskManager.addSubtask(new Subtask("Sub2", "Desc", Status.NEW, epic.getId(),  LocalDateTime.of(2025, 6, 5, 8, 0), Duration.ofMinutes(30)));
+        taskManager.addSubtask(new Subtask("Sub1", "Desc", Status.NEW, epic.getId(), LocalDateTime.of(2025, 6, 5, 7, 0), Duration.ofMinutes(30)));
+        taskManager.addSubtask(new Subtask("Sub2", "Desc", Status.NEW, epic.getId(), LocalDateTime.of(2025, 6, 5, 8, 0), Duration.ofMinutes(30)));
         assertEquals(Status.NEW, taskManager.getEpicById(epic.getId()).getStatus());
     }
 
@@ -52,8 +53,8 @@ public class InMemoryTaskManagerTest extends TaskManagerTest<InMemoryTaskManager
     void shouldReturnDoneStatusIfAllSubtasksAreDone() {
         Epic epic = new Epic("Epic", "Desc", Status.NEW);
         taskManager.addEpic(epic);
-        taskManager.addSubtask(new Subtask("Sub1", "Desc", Status.DONE, epic.getId(),  LocalDateTime.of(2025, 6, 5, 7, 0), Duration.ofMinutes(30)));
-        taskManager.addSubtask(new Subtask("Sub2", "Desc", Status.DONE, epic.getId(),  LocalDateTime.of(2025, 6, 5, 8, 0), Duration.ofMinutes(30)));
+        taskManager.addSubtask(new Subtask("Sub1", "Desc", Status.DONE, epic.getId(), LocalDateTime.of(2025, 6, 5, 7, 0), Duration.ofMinutes(30)));
+        taskManager.addSubtask(new Subtask("Sub2", "Desc", Status.DONE, epic.getId(), LocalDateTime.of(2025, 6, 5, 8, 0), Duration.ofMinutes(30)));
         assertEquals(Status.DONE, taskManager.getEpicById(epic.getId()).getStatus());
     }
 
@@ -62,7 +63,7 @@ public class InMemoryTaskManagerTest extends TaskManagerTest<InMemoryTaskManager
         Epic epic = new Epic("Epic", "Desc", Status.NEW);
         taskManager.addEpic(epic);
         taskManager.addSubtask(new Subtask("Sub1", "Desc", Status.NEW, epic.getId()));
-        taskManager.addSubtask(new Subtask("Sub2", "Desc", Status.DONE, epic.getId(),  LocalDateTime.of(2025, 6, 5, 6, 0), Duration.ofMinutes(30)));
+        taskManager.addSubtask(new Subtask("Sub2", "Desc", Status.DONE, epic.getId(), LocalDateTime.of(2025, 6, 5, 6, 0), Duration.ofMinutes(30)));
         assertEquals(Status.IN_PROGRESS, taskManager.getEpicById(epic.getId()).getStatus());
     }
 
@@ -71,7 +72,7 @@ public class InMemoryTaskManagerTest extends TaskManagerTest<InMemoryTaskManager
         Epic epic = new Epic("Epic", "Desc", Status.NEW);
         taskManager.addEpic(epic);
         taskManager.addSubtask(new Subtask("Sub1", "Desc", Status.IN_PROGRESS, epic.getId()));
-        taskManager.addSubtask(new Subtask("Sub2", "Desc", Status.IN_PROGRESS, epic.getId(),  LocalDateTime.of(2025, 6, 5, 6, 0), Duration.ofMinutes(30)));
+        taskManager.addSubtask(new Subtask("Sub2", "Desc", Status.IN_PROGRESS, epic.getId(), LocalDateTime.of(2025, 6, 5, 6, 0), Duration.ofMinutes(30)));
         assertEquals(Status.IN_PROGRESS, taskManager.getEpicById(epic.getId()).getStatus());
     }
 
